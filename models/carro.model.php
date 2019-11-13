@@ -52,5 +52,45 @@ function agregarNuevoCarro($nombre, $peso, $modelo) {
       }
 }
 
+/**********************************commit 4**********************************************/
 
+function obtenerCarroPorId($id)
+{
+  $sqlstr = "select `carro`.`idcarro`,
+      `carro`.`carroNombre`,
+      `carro`.`carroPeso`,
+      `carro`.`carroModelo`
+  from `carro`.`carro` where idcarro=%d";
+  $carro= array();
+  $carro=obtenerUnRegistro(sprintf($sqlstr, $id));
+  return $carro;
+}
+
+function modificarCarro($nombre, $peso, $cmodelo,  $idcarro)
+{
+    $updSQL = "UPDATE carro set carroNombre='%s', carroPeso=%f,
+     carroModelo='%s' where idcarro=%d;";
+
+    return ejecutarNonQuery(
+        sprintf(
+            $updSQL,
+            $nombre,
+            $peso,
+            $modelo,
+            $idcarro
+        )
+    );
+}
+
+function eliminarCarro($idcarro)
+{
+    $delSQL = "DELETE FROM carro where idcarro=%d;";
+
+    return ejecutarNonQuery(
+        sprintf(
+            $delSQL,
+            $idcarro
+        )
+    );
+}
 ?>
